@@ -6,7 +6,7 @@
   <title>Star Weigh — Electronic Weighing Machines</title>
   <meta name="description" content="Star Weigh — Electronic weighing machines: bench scales, platform scales, counting scales, crane scales and more." />
   <style>
-    /* Simple, modern responsive CSS */
+    /* Simple, modern responsive CSS (mobile-first) */
     :root{
       --brand:#0f4c81; /* deep blue */
       --accent:#f9b233; /* warm gold */
@@ -16,73 +16,120 @@
       font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
     }
     *{box-sizing:border-box}
-    body{margin:0;background:#f5f7fb;color:#0b1220;line-height:1.5}
-    header{background:linear-gradient(90deg,var(--brand),#093856);color:white;padding:22px 20px}
-    .container{max-width:1100px;margin:0 auto;padding:24px}
+    html,body{height:100%}
+    body{margin:0;background:#f5f7fb;color:#0b1220;line-height:1.5; -webkit-font-smoothing:antialiased; overflow-x:hidden}
+    header{background:linear-gradient(90deg,var(--brand),#093856);color:white;padding:18px 16px}
+    .container{max-width:1100px;margin:0 auto;padding:18px}
     .nav{display:flex;align-items:center;justify-content:space-between;gap:16px}
-    .brand{display:flex;align-items:center;gap:12px;font-weight:700;font-size:20px}
+    .brand{display:flex;align-items:center;gap:12px;font-weight:700;font-size:20px;flex-shrink:0}
     .brand .logo{width:44px;height:44px;border-radius:10px;background:var(--accent);display:flex;align-items:center;justify-content:center;color:#08303e;font-weight:800}
-    nav ul{display:flex;gap:14px;list-style:none;margin:0;padding:0}
-    nav a{color:rgba(255,255,255,0.95);text-decoration:none;padding:8px 12px;border-radius:8px}
+    nav{display:flex;align-items:center;gap:12px}
+    nav ul{display:flex;gap:12px;list-style:none;margin:0;padding:0;align-items:center}
+    nav a{color:rgba(255,255,255,0.95);text-decoration:none;padding:8px 10px;border-radius:8px;white-space:nowrap}
     nav a:hover{background:rgba(255,255,255,0.06)}
+    .mobile-toggle{display:none;background:transparent;border:none;color:white;font-size:22px;align-items:center;justify-content:center;padding:6px 8px}
 
-    .hero{display:flex;gap:28px;align-items:center;padding:36px 0}
-    .hero-left{flex:1}
-    .hero h1{margin:0;font-size:34px}
+    .hero{display:flex;gap:20px;align-items:center;padding:28px 0;flex-direction:column}
+    .hero-left{width:100%}
+    .hero h1{margin:0;font-size:28px}
     .hero p{color:#e6f0fb;margin:12px 0 0}
-    .cta{margin-top:16px;display:flex;gap:12px}
+    .cta{margin-top:14px;display:flex;gap:10px;flex-wrap:wrap}
     .btn{background:var(--accent);border:none;padding:10px 16px;border-radius:10px;font-weight:600;cursor:pointer}
     .btn.secondary{background:transparent;color:white;border:1px solid rgba(255,255,255,0.15)}
 
     /* sections */
-    section{padding:36px 0}
-    h2.section-title{font-size:22px;margin:0 0 12px}
-    .grid{display:grid;gap:18px}
-    .two-col{grid-template-columns:1fr 380px}
+    section{padding:28px 0}
+    h2.section-title{font-size:20px;margin:0 0 10px}
+    .grid{display:grid;gap:14px}
+    .two-col{grid-template-columns:1fr;gap:18px;display:grid}
 
     /* product grid */
-    .products-grid{grid-template-columns:repeat(auto-fit,minmax(220px,1fr));}
-    .card{background:var(--surface);border-radius:14px;padding:14px;box-shadow:0 6px 18px rgba(12,24,60,0.06);}
-    .product-card img{width:100%;height:150px;object-fit:cover;border-radius:10px}
+    .products-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+    @media (min-width:820px){
+      .products-grid{grid-template-columns:repeat(3,minmax(0,1fr));}
+    }
+    @media (min-width:1100px){
+      .products-grid{grid-template-columns:repeat(3,minmax(0,1fr));}
+    }
+
+    .card{background:var(--surface);border-radius:14px;padding:14px;box-shadow:0 6px 18px rgba(12,24,60,0.06);overflow:hidden}
+    .product-card img{width:100%;height:160px;object-fit:cover;border-radius:10px;display:block}
     .product-card h3{margin:10px 0 6px;font-size:16px}
     .product-card p{margin:0;color:var(--muted);font-size:14px}
     .meta{display:flex;justify-content:space-between;align-items:center;margin-top:10px}
     .tag{background:#eef4ff;color:#0b3a66;padding:6px 8px;border-radius:8px;font-size:13px}
 
     /* modal */
-    .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(6,12,24,0.5);padding:24px}
+    .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(6,12,24,0.55);padding:18px;z-index:1200}
     .modal.open{display:flex}
-    .modal-content{width:100%;max-width:900px;background:white;border-radius:12px;padding:18px;box-shadow:0 10px 40px rgba(2,8,23,0.4);}
-    .modal-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-    .modal-content img{width:100%;height:300px;object-fit:cover;border-radius:10px}
+    .modal-content{width:100%;max-width:900px;background:white;border-radius:12px;padding:16px;box-shadow:0 10px 40px rgba(2,8,23,0.35);max-height:90vh;overflow:auto}
+    .modal-grid{display:grid;grid-template-columns:1fr;gap:14px}
+    .modal-content img{width:100%;height:auto;object-fit:cover;border-radius:10px}
 
     /* contact */
-    form input, form textarea{width:100%;padding:10px;border-radius:8px;border:1px solid #e6eaf0}
+    form input, form textarea{width:100%;padding:10px;border-radius:8px;border:1px solid #e6eaf0;font-family:inherit}
     form label{font-size:13px;color:var(--muted);display:block;margin-bottom:6px}
     .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 
-    footer{background:#0b1220;color:#d7e3f5;padding:22px}
+    footer{background:#0b1220;color:#d7e3f5;padding:18px;border-top:1px solid rgba(255,255,255,0.03);}
 
-    /* responsive */
-    @media (max-width:900px){.hero{flex-direction:column}.two-col{grid-template-columns:1fr}.modal-grid{grid-template-columns:1fr}}
+    /* responsive tweaks */
+    @media (min-width:700px){
+      .hero{flex-direction:row}
+      .hero-left{flex:1}
+      .two-col{grid-template-columns:1fr 360px}
+      .modal-grid{grid-template-columns:1fr 1fr}
+      .product-card img{height:150px}
+      .products-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+    }
+
+    @media (max-width:700px){
+      .mobile-toggle{display:inline-flex}
+      nav ul{display:none;flex-direction:column;background:transparent;padding:10px;border-radius:10px;position:absolute;right:18px;top:64px;box-shadow:0 8px 20px rgba(2,8,23,0.12);background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));backdrop-filter: blur(4px)}
+      nav ul.show{display:flex}
+      nav{position:relative}
+      .products-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .product-card img{height:140px}
+      .form-grid{grid-template-columns:1fr}
+    }
+
+    /* small improvements */
+    .modal-content h3{margin:0}
+    .modal-content .close-row{display:flex;justify-content:space-between;align-items:center;gap:12px}
+    .modal-content ul{margin:8px 0 0;padding-left:18px}
+    .hero-right{max-width:420px;width:100%}
+    .contact-column{display:grid;gap:12px}
+    iframe { width:100%; height:300px; border:0; display:block }
+
+    /* accessibility / touch-friendly */
+    .btn, nav a { padding:12px 14px; touch-action:manipulation; -webkit-tap-highlight-color: rgba(0,0,0,0.04) }
+
+    /* ensure grid/flex children can shrink */
+    .container, .nav, .hero, .modal-grid, .form-grid, .card { min-width:0 }
   </style>
 </head>
 <body>
   <header>
     <div class="container nav">
-      <div class="brand">
-        <div class="logo">SW</div>
-        <div>
-          <div>Star Weigh</div>
-          <div style="font-size:12px;color:rgba(255,255,255,0.85)">Electronic Weighing Machines</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <div class="brand">
+          <div class="logo">SW</div>
+          <div style="line-height:1">
+            <div>Star Weigh</div>
+            <div style="font-size:12px;color:rgba(255,255,255,0.85)">Electronic Weighing Machines</div>
+          </div>
         </div>
+
+        <!-- mobile menu toggle -->
+        <button class="mobile-toggle" aria-expanded="false" aria-controls="main-nav" onclick="toggleNav()" title="Menu">☰</button>
       </div>
+
       <nav>
-        <ul>
-          <li><a href="#home">Home</a></li>
-          <li><a href="#about">About Us</a></li>
-          <li><a href="#products">Products</a></li>
-          <li><a href="#contact">Contact</a></li>
+        <ul id="main-nav" role="menu">
+          <li role="none"><a role="menuitem" href="#home">Home</a></li>
+          <li role="none"><a role="menuitem" href="#about">About Us</a></li>
+          <li role="none"><a role="menuitem" href="#products">Products</a></li>
+          <li role="none"><a role="menuitem" href="#contact">Contact</a></li>
         </ul>
       </nav>
     </div>
@@ -98,7 +145,8 @@
           <button class="btn secondary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Get in touch</button>
         </div>
       </div>
-      <div style="width:420px">
+
+      <div class="hero-right">
         <div class="card" style="padding:0;overflow:hidden">
           <img src="https://images.unsplash.com/photo-1581091012184-7b9b5c5b0b2f?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="weighing machine example" style="width:100%;height:280px;object-fit:cover">
         </div>
@@ -111,7 +159,7 @@
         <div>
           <p>Star Weigh specializes in electronic weighing machines for multiple industries — from retail counters to heavy industrial platforms and laboratory balances. We focus on accuracy, robustness and post-sale support. This site is a starter template; replace product images and descriptions with your real content.</p>
 
-          <h3 style="margin-top:18px">Why choose us</h3>
+          <h3 style="margin-top:12px">Why choose us</h3>
           <ul>
             <li>High precision sensors and stable readings</li>
             <li>Durable design built for industrial conditions</li>
@@ -137,7 +185,7 @@
       <div class="grid products-grid" style="margin-top:14px">
         <!-- Product cards: update images and descriptions as needed -->
 
-        <div class="card product-card" data-product='{"title":"Bench Scale","subtitle":"Compact bench weighing","image":"images/bench.jpg","description":"Bench scales are compact tabletop weighing solutions for general-purpose commercial and industrial weighing. Typical uses include packing, labs and production lines. High-precision load cells and easy-toread displays make them suitable for repeatable measurements.","features":["Capacity: 6kg - 300kg","Stainless steel pan","Tare & count functions"]}'>
+        <div class="card product-card" data-product='{"title":"Bench Scale","subtitle":"Compact bench weighing","image":"images/bench.jpg","description":"Bench scales are compact tabletop weighing solutions for general-purpose commercial and industrial weighing. Typical uses include packing, labs and production lines. High-precision load cells and easy-to-read displays make them suitable for repeatable measurements.","features":["Capacity: 6kg - 300kg","Stainless steel pan","Tare & count functions"]}'>
           <img src="images/bench.jpg" alt="Bench Scale (replace image)">
           <h3>Bench Scale</h3>
           <p>Compact bench weighing solutions for shops and labs.</p>
@@ -186,7 +234,7 @@
       <h2 class="section-title">Contact Us</h2>
       <p style="color:var(--muted);margin-top:6px">Fill the form or reach us at the email/phone below.</p>
 
-      <div style="margin-top:12px;display:grid;grid-template-columns:1fr 380px;gap:18px">
+      <div style="margin-top:12px; display:grid; gap:18px; grid-template-columns:1fr;">
         <div class="card">
           <form id="contactForm" onsubmit="submitForm(event)">
             <div class="form-grid">
@@ -207,26 +255,23 @@
               <label for="message">Message</label>
               <textarea id="message" rows="5" required></textarea>
             </div>
-            <div style="margin-top:12px;display:flex;gap:10px;justify-content:flex-end">
+            <div style="margin-top:12px;display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap">
               <button type="submit" class="btn">Send</button>
               <button type="button" class="btn secondary" onclick="window.location.href='mailto:starinstruments1@gmail.com'">Email us</button>
             </div>
           </form>
         </div>
 
-        <div>
+        <div class="contact-column">
           <div class="card">
             <strong>Office</strong>
             <p style="margin-top:8px">Andhra Prabha Colony 1st Road, Vijayawada, Andhra Pradesh</p>
             <p style="margin-top:8px">Phone: +91 93473 56918</p>
             <p style="color:var(--muted);margin-top:8px"></p>
           </div>
-          <h3>Our Location</h3>
+          <h3 style="margin:0">Our Location</h3>
           <iframe 
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d368.869410524354!2d80.63859854668735!3d16.544628598533592!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a35e557acfbb803%3A0xc834dec26ac7d0ba!2sSTAR%20WEIGH%20Weighing%20Scales%20Vijayawada%20Andhra%20Pradesh!5e0!3m2!1sen!2sin!4v1764765962097!5m2!1sen!2sin"
-            width="100%" 
-            height="300" 
-            style="border:0;" 
             allowfullscreen="" 
             loading="lazy">
           </iframe>
@@ -236,7 +281,7 @@
   </main>
 
   <footer>
-    <div class="container" style="display:flex;justify-content:space-between;align-items:center">
+    <div class="container" style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
       <div>© <strong>Star Weigh</strong> — All rights reserved</div>
       <div style="font-size:13px;color:rgba(215,227,245,0.9)">Made with care • Starter website</div>
     </div>
@@ -244,10 +289,10 @@
 
   <!-- Product modal -->
   <div id="productModal" class="modal" onclick="if(event.target.id==='productModal'){closeModal()}">
-    <div class="modal-content card">
-      <div style="display:flex;justify-content:space-between;align-items:center">
+    <div class="modal-content card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="close-row">
         <h3 id="modalTitle">Product</h3>
-        <button onclick="closeModal()" class="btn secondary">Close</button>
+        <button onclick="closeModal()" class="btn secondary" aria-label="Close product details">Close</button>
       </div>
       <div class="modal-grid" style="margin-top:12px">
         <div>
@@ -262,6 +307,24 @@
       </div>
     </div>
   </div>
+
+  <!-- Notes for you at top of the file: -->
+  <!-- 1) Replace placeholder images: images/bench.jpg, images/platform.jpg, etc. -->
+  <!-- 2) Update contact details and email. -->
+  <!-- 3) To publish: put this file and an images/ folder on any static host (Netlify, GitHub Pages, Vercel). -->
+  <!-- WhatsApp Floating Button -->
+  <a href="https://wa.me/919347356918" class="whatsapp-float" target="_blank" aria-label="WhatsApp chat">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" width="55" alt="WhatsApp">
+  </a>
+
+  <style>
+  .whatsapp-float {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1100;
+  }
+  </style>
 
   <script>
     // Open product modal with data from data-product attribute
@@ -279,8 +342,11 @@
       feat.innerHTML = '';
       (data.features || []).forEach(f=>{const li=document.createElement('li');li.innerText=f;feat.appendChild(li)});
       document.getElementById('productModal').classList.add('open');
+      // make modal content focusable for accessibility
+      const modalContent = document.querySelector('.modal-content');
+      if(modalContent) modalContent.focus();
     }
-    function closeModal(){document.getElementById('productModal').classList.remove('open');}
+    function closeModal(){document.getElementById('productModal').classList.remove('open')}
 
     // Contact form (client-side only) — replace with real endpoint in production
     function submitForm(e){
@@ -296,26 +362,46 @@
       window.location.href = `mailto:starinstruments1@gmail.com?subject=${subject}&body=${body}`;
     }
 
-    // Small helper: smooth scroll for nav
-    document.querySelectorAll('nav a').forEach(a=>{a.addEventListener('click',e=>{e.preventDefault(); const target=document.querySelector(a.getAttribute('href')); if(target)target.scrollIntoView({behavior:'smooth'});})});
+    // Smooth scroll for nav
+    document.querySelectorAll('nav a').forEach(a=>{
+      a.addEventListener('click',e=>{
+        e.preventDefault();
+        const target=document.querySelector(a.getAttribute('href'));
+        const navUl = document.getElementById('main-nav');
+        if(target) target.scrollIntoView({behavior:'smooth'});
+        // close mobile nav if open
+        if(navUl && navUl.classList.contains('show')) navUl.classList.remove('show');
+        const btn = document.querySelector('.mobile-toggle');
+        if(btn) btn.setAttribute('aria-expanded', 'false');
+      })
+    });
+
+    // Mobile nav toggle
+    function toggleNav(){
+      const ul = document.getElementById('main-nav');
+      if(!ul) return;
+      const isVisible = ul.classList.contains('show');
+      ul.classList.toggle('show', !isVisible);
+      const btn = document.querySelector('.mobile-toggle');
+      if(btn) btn.setAttribute('aria-expanded', String(!isVisible));
+    }
+
+    // ensure nav is visible on resize to desktop
+    window.addEventListener('resize', ()=> {
+      const ul = document.getElementById('main-nav');
+      if(!ul) return;
+      if(window.innerWidth > 700){
+        ul.classList.remove('show');
+        ul.style.display = 'flex';
+      } else {
+        ul.style.display = ''; // let CSS control via .show
+      }
+    });
+
+    // Close modal on ESC
+    window.addEventListener('keydown', (e)=> {
+      if(e.key === 'Escape') closeModal();
+    });
   </script>
-
-  <!-- Notes for you at top of the file: -->
-  <!-- 1) Replace placeholder images: images/bench.jpg, images/platform.jpg, etc. -->
-  <!-- 2) Update contact details and email. -->
-  <!-- 3) To publish: put this file and an images/ folder on any static host (Netlify, GitHub Pages, Vercel). -->
-   <!-- WhatsApp Floating Button -->
-<a href="https://wa.me/919347356918" class="whatsapp-float" target="_blank">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" width="55">
-</a>
-
-<style>
-.whatsapp-float {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  z-index: 100;
-}
-</style>
 </body>
 </html>
