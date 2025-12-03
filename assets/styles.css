@@ -264,17 +264,34 @@ footer .container {
   gap: 12px;
   flex-wrap: wrap;
 }
-/* FIX: Make homepage footer background blue */
-.home-footer {
-  background: linear-gradient(90deg,#07263d,#0f4c81) !important;
+/* ===== FORCE: homepage footer blue + white text =====
+   Paste this at the VERY END of your CSS file so it wins. */
+footer.home-footer,
+footer.home-footer * {
+  background: linear-gradient(90deg,#07263d,#0f4c81) !important; /* background for footer */
+  color: #ffffff !important;                                       /* white text everywhere */
+  font-weight: 700 !important;                                     /* bold */
+  font-size: 15px !important;
+  -webkit-font-smoothing:antialiased !important;
+}
+
+/* Make sure links & small tags are white too */
+footer.home-footer a,
+footer.home-footer a:visited,
+footer.home-footer a:hover,
+footer.home-footer span,
+footer.home-footer p,
+footer.home-footer address {
   color: #ffffff !important;
 }
 
-.home-footer p,
-.home-footer span {
+/* If your footer contains a .footer-row or other wrapper */
+footer.home-footer .footer-row,
+footer.home-footer .container {
+  background: transparent !important; /* allow footer gradient to show */
   color: #ffffff !important;
-  font-weight: 700;
 }
+
 
 
 /* ---------- MISC ----------- */
