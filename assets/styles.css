@@ -264,6 +264,18 @@ footer .container {
   gap: 12px;
   flex-wrap: wrap;
 }
+/* FIX: Make homepage footer background blue */
+.home-footer {
+  background: linear-gradient(90deg,#07263d,#0f4c81) !important;
+  color: #ffffff !important;
+}
+
+.home-footer p,
+.home-footer span {
+  color: #ffffff !important;
+  font-weight: 700;
+}
+
 
 /* ---------- MISC ----------- */
 .hidden { display:none; }
