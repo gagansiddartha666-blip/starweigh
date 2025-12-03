@@ -1,0 +1,209 @@
+/* ===== Star Weigh — styles (updated) ===== */
+/* Replace or merge with your existing assets/styles.css */
+
+/* palette and base */
+:root{
+  --brand:#0f4c81;
+  --accent:#f9b233;
+  --muted:#667085;
+  --surface:#ffffff;
+  --radius:12px;
+  font-family:Inter,system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  background:#f5f7fb;
+  color:#0b1220;
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+  font-size:16px;
+}
+
+/* container */
+.container{max-width:1100px;margin:0 auto;padding:18px}
+
+/* ===== header / nav ===== */
+/* Make header always have the dark gradient so white nav text is readable */
+header{
+  background:linear-gradient(90deg,var(--brand),#093856);
+  color:white;
+  padding:14px 0;
+  border-bottom-left-radius:0;
+  border-bottom-right-radius:0;
+}
+
+/* nav layout */
+.nav{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand{display:flex;align-items:center;gap:12px;font-weight:700;font-size:20px;color:white}
+.logo{width:44px;height:44px;border-radius:10px;background:var(--accent);display:flex;align-items:center;justify-content:center;color:#08303e;font-weight:800}
+.subtitle{font-size:12px;color:rgba(255,255,255,0.95)}
+
+/* nav list and links — ensure consistent look across all pages */
+nav ul{display:flex;gap:12px;list-style:none;margin:0;padding:0}
+nav a{
+  color:rgba(255,255,255,0.95);
+  text-decoration:none;
+  padding:8px 10px;
+  border-radius:8px;
+  font-weight:700;
+  text-transform:uppercase;       /* make HOME ABOUT US PRODUCTS CONTACT */
+  letter-spacing:0.6px;
+  font-size:13px;
+}
+nav a:hover{background:rgba(255,255,255,0.06)}
+
+/* mobile menu toggle */
+.mobile-toggle{display:none;background:transparent;border:none;color:white;font-size:22px}
+
+/* ===== hero / layout ===== */
+/* keep hero responsive and readable */
+.hero{display:flex;gap:20px;align-items:center;padding:28px 0;flex-direction:column}
+.hero-left{width:100%}
+.hero h1{margin:0;font-size:28px;color:var(--surface); /* ensure strong contrast when placed on dark media card */}
+/* If hero-left appears on light background, fallback to dark text */
+.hero-left .lead{color:#1a1a1a;margin:12px 0 0}
+.hero h1,
+.hero-left h1,
+.hero-left .lead {
+  color: #0b1220 !important;   /* strong dark color */
+}
+.hero-left p {
+  color: #0b1220 !important;
+}
+
+/* call-to-action buttons */
+.cta{margin-top:14px;display:flex;gap:10px}
+.btn{
+  background:var(--accent);
+  border:none;
+  padding:10px 16px;
+  border-radius:10px;
+  font-weight:700;
+  cursor:pointer;
+  text-decoration:none;
+  color:#08303e;
+  display:inline-block;
+}
+.btn.secondary{background:#ffffff;color:var(--brand);border:1px solid var(--brand)}
+
+/* cards and surfaces */
+.card{
+  background:var(--surface);
+  border-radius:14px;
+  padding:14px;
+  box-shadow:0 6px 18px rgba(12,24,60,0.06);
+  overflow:hidden;
+}
+
+/* ===== products grid & images (fixed) ===== */
+/* Grid layout for products */
+.products-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+@media(min-width:820px){.products-grid{grid-template-columns:repeat(3,1fr)}}
+
+/* Product / media images: constrain size so they don't grow too large */
+.product-card img,
+.media-card img {
+  width:100%;
+  height:200px;          /* slightly taller for better visuals */
+  max-height:220px;
+  object-fit:cover;
+  border-radius:10px;
+  display:block;
+}
+
+/* product-card container tweaks */
+.product-card{display:flex;flex-direction:column;gap:10px}
+.product-card h3{margin:0;font-size:16px}
+.product-card .meta{margin-top:auto}
+
+/* modal image responsiveness */
+.modal-content img,
+#modalImage {
+  width:100%;
+  height:auto;
+  max-height:420px;
+  object-fit:contain;
+  border-radius:8px;
+}
+
+/* ===== typography / muted ===== */
+.muted{color:var(--muted)}
+
+/* two-column helper */
+.two-col{display:grid;gap:18px}
+@media(min-width:700px){.two-col{grid-template-columns:1fr 360px} .hero{flex-direction:row}}
+
+/* footer row */
+/* --- FOOTER: dark background + white bold text (recommended) --- */
+footer {
+  background: linear-gradient(90deg,#07263d,#0f4c81); /* dark blue gradient */
+  color: #ffffff !important;
+  padding: 20px 18px;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+footer, 
+footer .footer-row,
+footer p,
+footer a,
+footer span {
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  font-size: 15px;
+}
+
+/* center & spacing */
+footer .container { display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; }
+
+
+
+/* whatsapp float */
+.whatsapp-float{position:fixed;bottom:20px;right:20px;z-index:1100}
+
+/* modal styling */
+.modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(6,12,24,0.55);padding:18px;z-index:1200}
+.modal.open{display:flex}
+.modal-content{width:100%;max-width:900px;background:white;border-radius:12px;padding:16px;box-shadow:0 10px 40px rgba(2,8,23,0.35);max-height:90vh;overflow:auto}
+
+/* form grid helper used in some pages */
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+
+/* ===== CONTACT form: inputs + alignment (fixed) ===== */
+/* ensure labels and controls are neat and full-width */
+.card form{display:block}
+.card label{display:block;font-weight:600;margin-top:8px;margin-bottom:6px}
+.card input,
+.card textarea,
+.card select {
+  width:100%;
+  padding:10px 12px;
+  border-radius:10px;
+  border:1px solid #d6d9df;
+  font-size:15px;
+  background: #fff;
+  box-shadow:none;
+  outline:none;
+  transition:box-shadow .12s, border-color .12s;
+}
+.card input:focus,
+.card textarea:focus,
+.card select:focus {
+  border-color:var(--brand);
+  box-shadow:0 4px 14px rgba(15,76,129,0.06);
+}
+
+/* single column on small screens for contact form */
+@media(max-width:700px){
+  .mobile-toggle{display:inline-flex}
+  nav ul{display:none}
+  nav ul.show{display:flex;flex-direction:column}
+  .form-grid{grid-template-columns:1fr}
+}
+
+/* small utilities */
+.hidden{display:none}
+.center{text-align:center}
