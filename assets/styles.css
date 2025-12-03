@@ -65,6 +65,14 @@ nav a:hover{background:rgba(255,255,255,0.06)}
 .hero h1{margin:0;font-size:28px;color:var(--surface); /* ensure strong contrast when placed on dark media card */}
 /* If hero-left appears on light background, fallback to dark text */
 .hero-left .lead{color:#1a1a1a;margin:12px 0 0}
+.hero h1,
+.hero-left h1,
+.hero-left .lead {
+  color: #0b1220 !important;   /* strong dark color */
+}
+.hero-left p {
+  color: #0b1220 !important;
+}
 
 /* call-to-action buttons */
 .cta{margin-top:14px;display:flex;gap:10px}
@@ -130,6 +138,15 @@ nav a:hover{background:rgba(255,255,255,0.06)}
 
 /* footer row */
 .footer-row{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;color:#d7e3f5}
+.footer-row {
+  font-weight: 700 !important;   /* makes footer text thick */
+  font-size: 15px;
+  color: #ffffff !important;     /* ensures it stays visible */
+}
+footer {
+  font-weight: 700;
+}
+
 
 /* whatsapp float */
 .whatsapp-float{position:fixed;bottom:20px;right:20px;z-index:1100}
