@@ -359,4 +359,28 @@ footer.home-footer .container {
   height: 100%;
   border: 0;
 }
+/* ===== MOBILE PRODUCT FIX: 1 per row + show whole image ===== */
+
+/* At small screens, make the products grid single-column so each product is full width */
+@media (max-width: 700px) {
+  .products-grid {
+    grid-template-columns: 1fr !important;   /* one product per row on mobile */
+    gap: 14px;
+  }
+
+  /* Let product images scale naturally and avoid cropping */
+  .product-card img,
+  .media-card img {
+    width: 100% !important;
+    height: auto !important;         /* allow natural height */
+    max-height: none !important;     /* remove max-height that caused cropping */
+    object-fit: contain !important;  /* show whole image without cropping */
+    display: block;
+    border-radius: 10px;
+  }
+
+  /* Slightly increase padding inside product cards for breathing room */
+  .product-card { padding: 12px; }
+}
+
 
