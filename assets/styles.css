@@ -129,10 +129,18 @@ nav a:hover {
 .hero-left p {
   color: #0b1220 !important; /* FIX: lead text readable */
 }
+.hero-logo-row {
+  display: flex;
+  align-items: center;
+  gap: 15px;      /* space between the two images */
+  margin-bottom: 15px;
+}
+
+/* Each logo styling */
 .hero-logo {
   width: 120px;
   height: auto;
-  margin-bottom: 15px;
+  object-fit: contain;
 }
 .cta { margin-top: 14px; display: flex; gap: 10px; }
 
