@@ -266,4 +266,44 @@ footer .container { display:flex; align-items:center; justify-content:space-betw
 .product-card img, .product-item img {
   flex: 0 0 auto !important;
 }
+/* ===== product gallery: arrows + thumbnails ===== */
+.modal-content .arrow {
+  position: absolute;
+  top: 48%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.45);
+  color: #fff;
+  border: none;
+  padding: 10px 12px;
+  font-size: 20px;
+  cursor: pointer;
+  border-radius: 8px;
+  z-index: 40;
+}
+.modal-content .arrow.left { left: 8px; }
+.modal-content .arrow.right { right: 8px; }
+
+/* Thumbnails row */
+.thumbs img {
+  width: 72px;
+  height: 56px;
+  object-fit: cover;
+  border-radius: 6px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: border-color .12s, transform .12s;
+}
+.thumbs img:hover { transform: translateY(-3px); }
+.thumbs img.active { border-color: var(--brand); }
+
+/* Make modal grid stack on small screens */
+@media (max-width: 820px) {
+  .modal-grid { grid-template-columns: 1fr !important; }
+  .modal-content .arrow { top: 40%; }
+  .thumbs img { width: 64px; height: 48px; }
+}
+
+/* ensure product card images still show nicely */
+.product-card img { width:100%; height:auto; object-fit:cover; border-radius:10px; }
+
 
