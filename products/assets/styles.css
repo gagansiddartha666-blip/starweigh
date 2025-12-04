@@ -207,27 +207,57 @@ footer .container { display:flex; align-items:center; justify-content:space-betw
 /* small utilities */
 .hidden{display:none}
 .center{text-align:center}
-/* ===== MOBILE PRODUCT FIX: 1 per row + show whole image ===== */
+/* ===== FORCE: Products mobile full-width images (1 per row) ===== */
 
-/* At small screens, make the products grid single-column so each product is full width */
-@media (max-width: 700px) {
-  .products-grid {
-    grid-template-columns: 1fr !important;   /* one product per row on mobile */
-    gap: 14px;
+/* make sure grid becomes single-column on small screens */
+@media (max-width: 900px) {
+  .products-grid,
+  .product-list,
+  .products-container {
+    grid-template-columns: 1fr !important;
+    display: grid !important;
+    gap: 14px !important;
   }
 
-  /* Let product images scale naturally and avoid cropping */
+  /* ensure card allows images to show fully */
+  .product-card,
+  .product-item,
+  .media-card {
+    overflow: visible !important;
+    padding: 12px !important;
+  }
+
+  /* show full image without left/right cropping */
   .product-card img,
+  .product-item img,
   .media-card img {
     width: 100% !important;
-    height: auto !important;         /* allow natural height */
-    max-height: none !important;     /* remove max-height that caused cropping */
-    object-fit: contain !important;  /* show whole image without cropping */
-    display: block;
-    border-radius: 10px;
+    height: auto !important;
+    max-height: none !important;
+    object-fit: contain !important;
+    display: block !important;
+    margin: 0 auto !important;
+    border-radius: 10px !important;
   }
+}
 
-  /* Slightly increase padding inside product cards for breathing room */
-  .product-card { padding: 12px; }
+/* ALSO apply broadly in case different class names used */
+.products-grid img,
+.product-card img,
+.media-card img,
+.product-item img {
+  object-fit: contain !important;
+  height: auto !important;
+  max-width: 100% !important;
+}
+
+/* remove any parent overflow:hidden that may crop */
+.products-grid, .product-list, .products-container, .product-card, .product-item {
+  overflow: visible !important;
+}
+
+/* if images are inside flex items that shrink, allow them to grow */
+.product-card img, .product-item img {
+  flex: 0 0 auto !important;
 }
 
