@@ -46,3 +46,40 @@ function submitForm(e){
   const body=encodeURIComponent('Name: '+name+'\nEmail: '+email+'\n\nMessage:\n'+message);
   window.location.href = `mailto:starinstruments1@gmail.com?subject=${subject}&body=${body}`;
 }
+// Web3Forms AJAX contact form submit
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("contactForm");
+  const statusEl = document.getElementById("formStatus");
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    statusEl.style.display = "none";
+    statusEl.textContent = "";
+
+    const formData = new FormData(form);
+
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData
+      });
+
+      const data = await res.json();
+
+      if (data.success) {
+        statusEl.style.display = "block";
+        statusEl.style.color = "#0b8a4a"; // green
+        statusEl.textContent = "✔ Message sent successfully!";
+        form.reset();
+      } else {
+        throw new Error(data.message);
+      }
+
+    } catch (err) {
+      statusEl.style.display = "block";
+      statusEl.style.color = "#c62828"; // red
+      statusEl.textContent = "✖ Failed to send. Please try again.";
+    }
+  });
+});
