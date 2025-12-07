@@ -294,3 +294,51 @@ body.sidebar-open .offcanvas-nav {
 @media (min-width: 821px) {
   .nav-overlay, .offcanvas-nav { display: none; }
 }
+/* ===== Fix: show & style menu inside off-canvas sidebar ===== */
+
+/* Ensure the cloned nav inside the offcanvas is visible and vertical */
+.offcanvas-nav nav ul {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 10px !important;
+  margin: 8px 0 0 0 !important;
+  padding: 0 !important;
+}
+
+/* Make each list item simply a block (removes inline layout) */
+.offcanvas-nav nav li {
+  list-style: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Style the anchor links as large tappable buttons */
+.offcanvas-nav nav a {
+  display: block !important;
+  padding: 12px 14px !important;
+  border-radius: 8px !important;
+  text-decoration: none !important;
+  text-transform: uppercase !important;
+  font-weight: 700 !important;
+  color: #ffffff !important;            /* white on blue sidebar */
+  background: transparent !important;   /* default transparent */
+}
+
+/* Hover / active state */
+.offcanvas-nav nav a:hover,
+.offcanvas-nav nav a:focus {
+  background: rgba(255,255,255,0.08) !important;
+  outline: none !important;
+}
+
+/* If your nav had small subtitle text, make sure it's visible */
+.offcanvas-nav .subtitle { color: rgba(255,255,255,0.9) !important; }
+
+/* Make sure the sidebar has some inner scroll if very tall */
+.offcanvas-nav { overflow-y: auto; -webkit-overflow-scrolling: touch; }
+
+/* Ensure mobile default hide of global nav doesn't affect offcanvas clone */
+/* (this is redundant but safe) */
+@media (max-width: 820px) {
+  .offcanvas-nav nav ul { display: flex !important; }
+}
