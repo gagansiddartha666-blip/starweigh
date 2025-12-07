@@ -1,14 +1,48 @@
 // Shared JS for navigation, mobile toggle, smooth scroll and product modal
 
 // ---------------------- NAV / MOBILE TOGGLE ----------------------
-function toggleNav(){
-  const ul = document.getElementById('main-nav');
-  if(!ul) return;
-  const isVisible = ul.classList.contains('show');
-  ul.classList.toggle('show', !isVisible);
+// Toggle mobile sidebar: call toggleNav() or toggleNav(false) to close
+function toggleNav(forceOpen) {
+  // ensure elements exist
+  const nav = document.querySelector('nav');
+  const overlay = document.getElementById('navOverlay');
   const btn = document.querySelector('.mobile-toggle');
-  if(btn) btn.setAttribute('aria-expanded', String(!isVisible));
+
+  if(!nav) return;
+
+  // If we haven't already moved the nav into an offcanvas wrapper, do it once
+  if(!document.querySelector('.offcanvas-nav')) {
+    // create wrapper
+    const off = document.createElement('div');
+    off.className = 'offcanvas-nav';
+    // move current nav content (clone) into offcanvas wrapper
+    off.appendChild(nav.cloneNode(true));
+    // insert wrapper into DOM just after header
+    const header = document.querySelector('header');
+    header.parentNode.insertBefore(off, header.nextSibling);
+    // ensure links in the cloned nav close the sidebar when clicked
+    off.querySelectorAll('a').forEach(a => a.addEventListener('click', () => toggleNav(false)));
+  }
+
+  const isOpen = document.body.classList.contains('sidebar-open');
+  const shouldOpen = (typeof forceOpen === 'boolean') ? forceOpen : !isOpen;
+
+  if(shouldOpen) {
+    document.body.classList.add('sidebar-open');
+    if(btn) btn.setAttribute('aria-expanded','true');
+    if(overlay) overlay.setAttribute('aria-hidden','false');
+    // set focus to first link for accessibility
+    const firstLink = document.querySelector('.offcanvas-nav a');
+    if(firstLink) firstLink.focus();
+  } else {
+    document.body.classList.remove('sidebar-open');
+    if(btn) btn.setAttribute('aria-expanded','false');
+    if(overlay) overlay.setAttribute('aria-hidden','true');
+    // return focus to toggle
+    if(btn) btn.focus();
+  }
 }
+
 
 // Close mobile nav on link click and enable smooth scroll for anchors on same page
 document.addEventListener('DOMContentLoaded', () => {
