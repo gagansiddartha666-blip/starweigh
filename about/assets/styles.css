@@ -407,3 +407,23 @@ nav a:focus.is-current,
   outline: 2px solid rgba(15,76,129,0.18);
   outline-offset: 2px;
 }
+/* don't show ugly focus styles on click/tap; keep for keyboard users */
+nav a:focus,
+.offcanvas-nav a:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+/* show a subtle outline only for keyboard users */
+nav a:focus-visible,
+.offcanvas-nav a:focus-visible {
+  outline: 3px solid rgba(15,76,129,0.18);
+  outline-offset: 3px;
+}
+
+/* if you previously had a background applied to :focus, remove it */
+nav a.is-current,
+.offcanvas-nav nav a.is-current { /* keep current highlight style as you have it */ }
+
+/* ensure offcanvas container can receive focus without visual change */
+.offcanvas-nav[tabindex="-1"]:focus { outline: none; }
