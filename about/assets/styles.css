@@ -342,3 +342,21 @@ body.sidebar-open .offcanvas-nav {
 @media (max-width: 820px) {
   .offcanvas-nav nav ul { display: flex !important; }
 }
+/* ===== Fix: ensure offcanvas sidebar and overlay sit above header ===== */
+
+/* make sure header isn't above the sidebar */
+header {
+  z-index: 1200; /* keep header above normal page, but below sidebar */
+  position: relative; /* ensure z-index applies */
+}
+
+/* overlay slightly below the sidebar but above header/content */
+.nav-overlay {
+  z-index: 1499 !important;
+}
+
+/* sidebar must be highest so it fully covers the header */
+.offcanvas-nav {
+  z-index: 1500 !important;
+  position: fixed; /* ensure it sits above header */
+}
