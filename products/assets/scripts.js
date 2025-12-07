@@ -2,6 +2,47 @@
 
 // ---------------------- NAV / MOBILE TOGGLE ----------------------
 // Toggle mobile sidebar: call toggleNav() or toggleNav(false) to close
+// Toggle mobile sidebar: call toggleNav() or toggleNav(false) to close
+// ===== mark current nav item based on current location =====
+function setActiveNavLinks() {
+  try {
+    const links = document.querySelectorAll('nav a');
+    if(!links || links.length === 0) return;
+    // compute normalized current path (no trailing slash)
+    const curPath = location.pathname.replace(/\/+$/, '') || '/';
+
+    links.forEach(a => {
+      // remove previous markers
+      a.classList.remove('is-current');
+      a.removeAttribute('aria-current');
+
+      const href = a.getAttribute('href');
+      if(!href || href === '#') return;
+
+      // create an absolute URL based on the anchor href
+      const url = new URL(href, location.origin + location.pathname);
+      const linkPath = url.pathname.replace(/\/+$/, '') || '/';
+
+      // match logic:
+      // 1) exact pathname match
+      // 2) if linkPath is not root, check if current path endsWith linkPath (e.g., /products/index.html matches /products)
+      const isMatch = (linkPath === curPath) || (linkPath !== '/' && curPath.endsWith(linkPath));
+
+      if(isMatch) {
+        a.classList.add('is-current');
+        a.setAttribute('aria-current','page');
+        const li = a.closest('li');
+        if(li) li.classList.add('is-current');
+      } else {
+        const li = a.closest('li');
+        if(li) li.classList.remove('is-current');
+      }
+    });
+  } catch(e) {
+    // fail silently
+    console.error('setActiveNavLinks error', e);
+  }
+}
 function toggleNav(forceOpen) {
   // ensure elements exist
   const nav = document.querySelector('nav');
@@ -31,9 +72,16 @@ function toggleNav(forceOpen) {
     document.body.classList.add('sidebar-open');
     if(btn) btn.setAttribute('aria-expanded','true');
     if(overlay) overlay.setAttribute('aria-hidden','false');
-    // set focus to first link for accessibility
-    const firstLink = document.querySelector('.offcanvas-nav a');
-    if(firstLink) firstLink.focus();
+
+    // focus the offcanvas container (not the first link) to avoid a single menu item showing as selected
+    const offEl = document.querySelector('.offcanvas-nav');
+    if(offEl) {
+      offEl.setAttribute('tabindex', '-1'); // make it focusable programmatically
+      offEl.focus({ preventScroll: true });
+    }
+
+    // ensure the correct nav item is highlighted when sidebar opens
+    setActiveNavLinks();
   } else {
     document.body.classList.remove('sidebar-open');
     if(btn) btn.setAttribute('aria-expanded','false');
@@ -42,6 +90,7 @@ function toggleNav(forceOpen) {
     if(btn) btn.focus();
   }
 }
+
 
 
 // Close mobile nav on link click and enable smooth scroll for anchors on same page
@@ -59,6 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const btn = document.querySelector('.mobile-toggle');
       if(btn) btn.setAttribute('aria-expanded','false');
     });
+    setActiveNavLinks()
   });
 
   // attach contact form handler if present
