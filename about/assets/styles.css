@@ -360,3 +360,50 @@ header {
   z-index: 1500 !important;
   position: fixed; /* ensure it sits above header */
 }
+/* ===== active/current menu item highlight ===== */
+/* Desktop nav and mobile offcanvas both use .is-current */
+
+nav a.is-current,
+.offcanvas-nav nav a.is-current {
+  background: rgba(255,255,255,0.08); /* subtle highlight on dark header */
+  color: #ffffff !important;
+  position: relative;
+}
+
+/* left accent bar for off-canvas (and desktop when desired) */
+nav a.is-current::before,
+.offcanvas-nav nav a.is-current::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 6px;
+  bottom: 6px;
+  width: 4px;
+  border-radius: 6px;
+  background: var(--accent); /* uses your --accent color */
+}
+
+/* make sure the inline desktop nav highlight is subtle and readable on light backgrounds */
+@media (min-width: 821px) {
+  /* if header is dark, above works; if header is light, use a dark accent */
+  header nav a.is-current {
+    background: rgba(15,76,129,0.08);
+    color: #07263d !important;
+  }
+  header nav a.is-current::before {
+    background: var(--brand);
+  }
+}
+
+/* small animation */
+nav a.is-current,
+.offcanvas-nav nav a.is-current {
+  transition: background .18s ease, color .12s ease;
+}
+
+/* ensure focus states remain visible */
+nav a:focus.is-current,
+.offcanvas-nav nav a:focus.is-current {
+  outline: 2px solid rgba(15,76,129,0.18);
+  outline-offset: 2px;
+}
