@@ -341,3 +341,14 @@ footer .container { display:flex; align-items:center; justify-content:space-betw
   .video-grid { grid-template-columns: 1fr; }
   .video-grid video { height: auto; max-height: none; object-fit: contain; }
 }
+/* Prevent background interaction/overscroll while modal is open */
+body.modal-open {
+  overflow: hidden;               /* hide scrollbars */
+  touch-action: none;             /* stop touch gestures */
+  overscroll-behavior: none;      /* prevent background rubber-band on mobile */
+}
+
+/* Optional: ensure modal sits above everything */
+.modal {
+  z-index: 1200;
+}
