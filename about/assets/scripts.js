@@ -41,6 +41,7 @@ function setActiveNavLinks() {
 }
 
 // Toggle mobile sidebar: call toggleNav() or toggleNav(false) to close
+// Toggle mobile sidebar: call toggleNav() or toggleNav(false) to close
 function toggleNav(forceOpen) {
   // ensure elements exist
   const nav = document.querySelector('nav');
@@ -70,10 +71,16 @@ function toggleNav(forceOpen) {
     document.body.classList.add('sidebar-open');
     if(btn) btn.setAttribute('aria-expanded','true');
     if(overlay) overlay.setAttribute('aria-hidden','false');
-    // set focus to first link for accessibility
-    const firstLink = document.querySelector('.offcanvas-nav a');
-    if(firstLink) firstLink.focus();
-     setActiveNavLinks();
+
+    // focus the offcanvas container (not the first link) to avoid a single menu item showing as selected
+    const offEl = document.querySelector('.offcanvas-nav');
+    if(offEl) {
+      offEl.setAttribute('tabindex', '-1'); // make it focusable programmatically
+      offEl.focus({ preventScroll: true });
+    }
+
+    // ensure the correct nav item is highlighted when sidebar opens
+    setActiveNavLinks();
   } else {
     document.body.classList.remove('sidebar-open');
     if(btn) btn.setAttribute('aria-expanded','false');
@@ -82,6 +89,7 @@ function toggleNav(forceOpen) {
     if(btn) btn.focus();
   }
 }
+
 
 
 // Close mobile nav on link click and enable smooth scroll for anchors on same page
