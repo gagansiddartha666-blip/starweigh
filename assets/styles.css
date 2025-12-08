@@ -258,30 +258,7 @@ nav a:hover {
 
 /* ---------- FOOTER (LIGHT BACKGROUND + DARK BOLD TEXT) ----------- */
 
-footer {
-  background: #ffffff; /* FIX: matches your white footer */
-  color: #0b1220 !important;
-  padding: 20px 18px;
-  border-top: 1px solid #e6e9ef;
-}
 
-footer,
-footer .footer-row,
-footer p,
-footer a,
-footer span {
-  color: #0b1220 !important;  /* dark text */
-  font-weight: 700 !important;
-  font-size: 15px;
-}
-
-footer .container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  flex-wrap: wrap;
-}
 /* ---------- MISC ----------- */
 .hidden { display:none; }
 .center { text-align:center; }
