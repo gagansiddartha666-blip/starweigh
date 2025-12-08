@@ -492,3 +492,104 @@ nav a.is-current,
   .footer-bottom { align-items:center; text-align:center; }
   .footer-bottom .socials { justify-content:center; width:100%; }
 }
+/* ==========================================================================
+   FIX: restore footer 3-column layout on desktop and keep stacked on mobile
+   Paste this at the VERY END of assets/styles.css
+   ========================================================================== */
+
+/* Ensure footer container layout baseline */
+.site-footer .container {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 16px;
+  box-sizing: border-box;
+}
+
+/* Desktop / tablet: force three columns */
+@media (min-width: 881px) {
+  .footer-top {
+    display: grid !important;
+    grid-template-columns: 1.4fr 1fr 1.2fr !important;
+    gap: 28px !important;
+    align-items: start !important;
+    padding-bottom: 26px !important;
+    border-bottom: 1px solid rgba(255,255,255,0.04) !important;
+  }
+
+  .footer-bottom {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding-top: 18px !important;
+    gap: 10px !important;
+  }
+
+  /* Make sure each footer column is a block (not flex stack) */
+  .footer-col {
+    display: block !important;
+  }
+
+  /* Links list must be vertical in desktop footer */
+  .footer-links ul {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+    padding: 0 !important;
+    margin: 6px 0 0 !important;
+  }
+
+  /* Make social and copyright inline on desktop */
+  .footer-bottom .copyright,
+  .footer-bottom .socials {
+    display: inline-block !important;
+  }
+}
+
+/* Mobile: single-column stacking (keep this) */
+@media (max-width: 880px) {
+  .footer-top {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 18px !important;
+    padding-bottom: 16px !important;
+  }
+  .footer-bottom {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 8px !important;
+    padding-top: 12px !important;
+  }
+  .footer-bottom .socials {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    gap: 12px;
+  }
+}
+
+/* Ensure address and phone appear normally (not each char stacked) */
+.address-line,
+.footer-office address {
+  display: block !important;
+  color: rgba(255,255,255,0.85) !important;
+  font-size: 14px !important;
+  line-height: 1.5 !important;
+  white-space: normal !important;
+}
+
+/* Ensure footer logo keeps its size */
+.footer-logo img {
+  width: 48px !important;
+  height: 48px !important;
+  object-fit: contain !important;
+}
+
+/* Make sure offcanvas or other nav CSS don't unexpectedly affect footer */
+.site-footer,
+.site-footer * {
+  box-sizing: border-box !important;
+}
+
+/* final safety: if something earlier set .site-footer .container display:flex, reset it */
+.site-footer .container { display: block !important; }
