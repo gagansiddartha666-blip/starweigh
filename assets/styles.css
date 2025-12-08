@@ -282,43 +282,12 @@ footer .container {
   gap: 12px;
   flex-wrap: wrap;
 }
-/* ===== FORCE: homepage footer blue + white text =====
-   Paste this at the VERY END of your CSS file so it wins. */
-footer.home-footer,
-footer.home-footer * {
-  background: linear-gradient(90deg,#07263d,#0f4c81) !important; /* background for footer */
-  color: #ffffff !important;                                       /* white text everywhere */
-  font-weight: 700 !important;                                     /* bold */
-  font-size: 15px !important;
-  -webkit-font-smoothing:antialiased !important;
-}
-
-/* Make sure links & small tags are white too */
-footer.home-footer a,
-footer.home-footer a:visited,
-footer.home-footer a:hover,
-footer.home-footer span,
-footer.home-footer p,
-footer.home-footer address {
-  color: #ffffff !important;
-}
-
-/* If your footer contains a .footer-row or other wrapper */
-footer.home-footer .footer-row,
-footer.home-footer .container {
-  background: transparent !important; /* allow footer gradient to show */
-  color: #ffffff !important;
-}
-
-
-
 /* ---------- MISC ----------- */
 .hidden { display:none; }
 .center { text-align:center; }
 .two-col { display:grid; gap:18px; }
 @media(min-width:700px){ .two-col { grid-template-columns:1fr 360px; } }
 
-.footer-row { display:flex; gap:10px; }
 
 .whatsapp-float { position:fixed; bottom:20px; right:20px; z-index:1100; }
 
