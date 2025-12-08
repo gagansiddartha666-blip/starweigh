@@ -152,19 +152,6 @@ footer {
   border-top-right-radius: 12px;
 }
 
-footer, 
-footer .footer-row,
-footer p,
-footer a,
-footer span {
-  color: #ffffff !important;
-  font-weight: 700 !important;
-  font-size: 15px;
-}
-
-/* center & spacing */
-footer .container { display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; }
-
 
 
 /* whatsapp float */
