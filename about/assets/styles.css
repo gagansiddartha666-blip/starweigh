@@ -142,16 +142,6 @@ nav a:hover{background:rgba(255,255,255,0.06)}
 .two-col{display:grid;gap:18px}
 @media(min-width:700px){.two-col{grid-template-columns:1fr 360px} .hero{flex-direction:row}}
 
-/* footer row */
-/* --- FOOTER: dark background + white bold text (recommended) --- */
-footer {
-  background: linear-gradient(90deg,#07263d,#0f4c81); /* dark blue gradient */
-  color: #ffffff !important;
-  padding: 20px 18px;
-  border-top-left-radius: 12px;
-  border-top-right-radius: 12px;
-}
-
 
 
 /* whatsapp float */
