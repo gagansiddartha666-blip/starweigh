@@ -579,3 +579,29 @@ nav a.is-current,
     align-items: start !important;
   }
 }
+/* ---------- FORCE footer 3-column (append at VERY END) ---------- */
+.site-footer .footer-top {
+  /* if .container was on the same element, this will still win */
+  display: grid !important;
+  grid-template-columns: 1.4fr 1fr 1.2fr !important;
+  gap: 28px !important;
+  align-items: start !important;
+  padding-bottom: 26px !important;
+  border-bottom: 1px solid rgba(255,255,255,0.04) !important;
+}
+
+/* ensure each direct child behaves like a block column */
+.site-footer .footer-top > * {
+  display: block !important;
+  min-width: 0 !important;    /* prevents flex-basis/overflow issues */
+  width: auto !important;
+}
+
+/* preserve the mobile stacked behaviour */
+@media (max-width: 880px) {
+  .site-footer .footer-top {
+    grid-template-columns: 1fr !important;
+    gap: 18px !important;
+    padding-bottom: 16px !important;
+  }
+}
