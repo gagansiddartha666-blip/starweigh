@@ -593,3 +593,12 @@ nav a.is-current,
 
 /* final safety: if something earlier set .site-footer .container display:flex, reset it */
 .site-footer .container { display: block !important; }
+/* FORCE FOOTER BACK TO 3 COLUMNS ON DESKTOP */
+@media (min-width: 881px) {
+  .footer-top {
+    display: grid !important;
+    grid-template-columns: 1.4fr 1fr 1.2fr !important;
+    gap: 28px !important;
+    align-items: start !important;
+  }
+}
