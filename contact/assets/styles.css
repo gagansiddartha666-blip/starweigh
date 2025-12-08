@@ -427,3 +427,203 @@ nav a.is-current,
 
 /* ensure offcanvas container can receive focus without visual change */
 .offcanvas-nav[tabindex="-1"]:focus { outline: none; }
+.site-footer {
+  background: linear-gradient(180deg, rgba(4,40,65,0.95), rgba(7,86,125,0.95));
+  color: rgba(255,255,255,0.92);
+  padding: 44px 0 26px;
+  font-family: inherit;
+}
+
+/* container inside footer uses same .container as site */
+.site-footer .container { display: block; max-width: 1180px; margin: 0 auto; padding: 0 16px; }
+
+/* Top row: three columns */
+.footer-top {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1.2fr;
+  gap: 28px;
+  align-items: start;
+  padding-bottom: 26px;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+
+/* Brand column */
+.footer-brand .brand-row { display:flex; gap:14px; align-items:center; }
+.footer-logo img { width:48px; height:48px; object-fit:contain; border-radius:8px; background:rgba(255,255,255,0.02); padding:6px; }
+.brand-text h3 { margin:0; font-size:20px; color:#ffda5b; } /* yellow-ish for brand title */
+.brand-text .small-muted { margin:6px 0 0; color:rgba(255,255,255,0.85); font-size:14px; }
+
+/* Quick links */
+.footer-links h4,
+.footer-office h4 { margin:0 0 10px; color:#f2c94c; font-size:16px; font-weight:800; }
+.footer-links ul { list-style:none; padding:0; margin:6px 0 0; display:flex; flex-direction:column; gap:8px; }
+.footer-links a { color:rgba(255,255,255,0.85); text-decoration:none; font-weight:600; }
+.footer-links a:hover { text-decoration:underline; color:#fff; }
+
+/* Office column */
+.footer-office h5 { margin:0 0 8px; color:#ffd36a; font-size:15px; }
+.footer-office address { font-style:normal; color:rgba(255,255,255,0.8); line-height:1.5; font-size:14px; }
+.footer-office .phone { margin-top:10px; color:rgba(255,255,255,0.95); font-weight:700; }
+.footer-office .phone a { color:inherit; text-decoration:none; }
+
+/* Bottom row */
+.footer-bottom {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding-top:18px;
+  gap:10px;
+}
+.footer-bottom .copyright { color:rgba(255,255,255,0.72); font-size:13px; }
+.footer-bottom .socials { display:flex; gap:12px; align-items:center; }
+.footer-bottom .social { color:#0b63a5; background: rgba(255,255,255,0.12); padding:6px 8px; border-radius:6px; text-decoration:none; font-weight:700; font-size:13px; }
+
+/* small screens: stack columns vertically */
+@media (max-width: 880px) {
+  .footer-top { grid-template-columns: 1fr; gap:18px; padding-bottom:16px; }
+  .footer-bottom { flex-direction:column; align-items:flex-start; gap:8px; padding-top:12px; }
+  .footer-logo img { width:44px; height:44px; }
+}
+
+/* tiny screens: center bottom items */
+@media (max-width: 420px) {
+  .site-footer .container { padding: 0 12px; }
+  .footer-bottom { align-items:center; text-align:center; }
+  .footer-bottom .socials { justify-content:center; width:100%; }
+}
+/* ==========================================================================
+   FIX: restore footer 3-column layout on desktop and keep stacked on mobile
+   Paste this at the VERY END of assets/styles.css
+   ========================================================================== */
+
+/* Ensure footer container layout baseline */
+.site-footer .container {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 16px;
+  box-sizing: border-box;
+}
+
+/* Desktop / tablet: force three columns */
+@media (min-width: 881px) {
+  .footer-top {
+    display: grid !important;
+    grid-template-columns: 1.4fr 1fr 1.2fr !important;
+    gap: 28px !important;
+    align-items: start !important;
+    padding-bottom: 26px !important;
+    border-bottom: 1px solid rgba(255,255,255,0.04) !important;
+  }
+
+  .footer-bottom {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding-top: 18px !important;
+    gap: 10px !important;
+  }
+
+  /* Make sure each footer column is a block (not flex stack) */
+  .footer-col {
+    display: block !important;
+  }
+
+  /* Links list must be vertical in desktop footer */
+  .footer-links ul {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+    padding: 0 !important;
+    margin: 6px 0 0 !important;
+  }
+
+  /* Make social and copyright inline on desktop */
+  .footer-bottom .copyright,
+  .footer-bottom .socials {
+    display: inline-block !important;
+  }
+}
+
+/* Mobile: single-column stacking (keep this) */
+@media (max-width: 880px) {
+  .footer-top {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 18px !important;
+    padding-bottom: 16px !important;
+  }
+  .footer-bottom {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 8px !important;
+    padding-top: 12px !important;
+  }
+  .footer-bottom .socials {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    gap: 12px;
+  }
+}
+
+/* Ensure address and phone appear normally (not each char stacked) */
+.address-line,
+.footer-office address {
+  display: block !important;
+  color: rgba(255,255,255,0.85) !important;
+  font-size: 14px !important;
+  line-height: 1.5 !important;
+  white-space: normal !important;
+}
+
+/* Ensure footer logo keeps its size */
+.footer-logo img {
+  width: 48px !important;
+  height: 48px !important;
+  object-fit: contain !important;
+}
+
+/* Make sure offcanvas or other nav CSS don't unexpectedly affect footer */
+.site-footer,
+.site-footer * {
+  box-sizing: border-box !important;
+}
+
+/* final safety: if something earlier set .site-footer .container display:flex, reset it */
+.site-footer .container { display: block !important; }
+/* FORCE FOOTER BACK TO 3 COLUMNS ON DESKTOP */
+@media (min-width: 881px) {
+  .footer-top {
+    display: grid !important;
+    grid-template-columns: 1.4fr 1fr 1.2fr !important;
+    gap: 28px !important;
+    align-items: start !important;
+  }
+}
+/* ---------- FORCE footer 3-column (append at VERY END) ---------- */
+.site-footer .footer-top {
+  /* if .container was on the same element, this will still win */
+  display: grid !important;
+  grid-template-columns: 1.4fr 1fr 1.2fr !important;
+  gap: 28px !important;
+  align-items: start !important;
+  padding-bottom: 26px !important;
+  border-bottom: 1px solid rgba(255,255,255,0.04) !important;
+}
+
+/* ensure each direct child behaves like a block column */
+.site-footer .footer-top > * {
+  display: block !important;
+  min-width: 0 !important;    /* prevents flex-basis/overflow issues */
+  width: auto !important;
+}
+
+/* preserve the mobile stacked behaviour */
+@media (max-width: 880px) {
+  .site-footer .footer-top {
+    grid-template-columns: 1fr !important;
+    gap: 18px !important;
+    padding-bottom: 16px !important;
+  }
+}
