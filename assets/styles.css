@@ -745,3 +745,46 @@ nav a.is-current,
     padding-bottom: 16px !important;
   }
 }
+/* ===== Customers Grid Section ===== */
+
+.customers-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* mobile: 2 per row */
+  gap: 16px;
+  margin-top: 14px;
+  justify-items: center;
+  align-items: center;
+}
+
+.customer-card {
+  background: rgba(255,255,255,0.1);
+  padding: 12px;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 180px;
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.customer-card img {
+  max-width: 100%;
+  max-height: 60px;
+  object-fit: contain;
+}
+
+/* Tablet: 3 per row */
+@media (min-width: 700px) {
+  .customers-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Desktop: 4 per row */
+@media (min-width: 1100px) {
+  .customers-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
