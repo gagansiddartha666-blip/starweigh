@@ -605,3 +605,36 @@ nav a.is-current,
     padding-bottom: 16px !important;
   }
 }
+/* ===== Desktop nav current-item fix =====
+   Makes the highlighted item readable on dark header
+   Paste at the END of assets/styles.css
+*/
+
+@media (min-width: 821px) {
+  /* make the active desktop nav item clearly visible */
+  header nav a.is-current {
+    background: rgba(255,255,255,0.08) !important; /* subtle light pill */
+    color: #ffffff !important;                      /* white text for contrast */
+    position: relative !important;
+    padding-left: 14px !important;                  /* give room so left accent doesn't overlap text */
+    padding-right: 14px !important;
+  }
+
+  /* left accent bar (keeps the yellow accent) */
+  header nav a.is-current::before {
+    content: "";
+    position: absolute;
+    left: 4px;              /* small inset so pill has margin on the left */
+    top: 8px;
+    bottom: 8px;
+    width: 4px;
+    border-radius: 6px;
+    background: var(--accent) !important;
+  }
+
+  /* ensure hover still works and doesn't hide the accent */
+  header nav a.is-current:hover {
+    background: rgba(255,255,255,0.10) !important;
+    color: #ffffff !important;
+  }
+}
