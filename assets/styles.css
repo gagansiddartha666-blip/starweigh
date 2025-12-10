@@ -854,33 +854,37 @@ nav a.is-current,
   .video-grid { grid-template-columns: 1fr; }
   .video-grid video { height: auto; max-height: 480px; }
 }
-/* ===== Full-page subtle logo watermark background ===== */
-body {
-  /* gradient background (your existing theme) */
-  background:
-    linear-gradient(180deg, #083656 0%, #0f4c81 100%);
+/* ===== Watermark: use a pseudo-element on .hero (safe, non-destructive) ===== */
+/* Replace images/watermark.png with your watermark file path (PNG with transparent bg recommended) */
 
-  /* Add the logo watermark */
-  background-image: 
-    url("../images/StarWeighLogo1.jpeg"),
-    linear-gradient(180deg, #083656 0%, #0f4c81 100%);
-
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-attachment: fixed;   /* stays fixed when scrolling */
-  background-size: 420px;         /* watermark size */
-
-  /* fade the logo so it doesn't affect readability */
-  opacity: 1; /* DO NOT reduce this; instead use pseudo-element below */
+.hero {
+  position: relative;            /* create stacking context for pseudo-element */
+  background-color: transparent; /* ensure hero itself has no bg that could create blocks */
+  z-index: 0;
 }
 
-/* Apply faint opacity only to the logo, not the page */
-body::before {
+/* watermark / logo behind content */
+.hero::after {
   content: "";
-  position: fixed;
-  inset: 0;
-  background: url("../images/StarWeighLogo1.jpeg") center/420px no-repeat;
-  opacity: 0.06;                  /* transparency level — perfect watermark */
-  pointer-events: none;           /* does not block clicks */
-  z-index: -1;                    /* stays behind all content */
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 40px;                      /* tweak vertical position (smaller => closer to top) */
+  width: 420px;                   /* tweak size to taste */
+  height: auto;
+  max-width: 60%;
+  max-height: 220px;
+  background-image: url("images/watermark.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  opacity: 0.12;                  /* subtle watermark; increase/decrease as needed */
+  pointer-events: none;           /* doesn't block clicks */
+  z-index: 0;                      /* behind content */
+}
+
+/* keep text / buttons above watermark */
+.hero > * {
+  position: relative;
+  z-index: 1;
 }
