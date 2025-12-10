@@ -854,37 +854,3 @@ nav a.is-current,
   .video-grid { grid-template-columns: 1fr; }
   .video-grid video { height: auto; max-height: 480px; }
 }
-/* ===== Watermark: use a pseudo-element on .hero (safe, non-destructive) ===== */
-/* Replace images/watermark.png with your watermark file path (PNG with transparent bg recommended) */
-
-.hero {
-  position: relative;            /* create stacking context for pseudo-element */
-  background-color: transparent; /* ensure hero itself has no bg that could create blocks */
-  z-index: 0;
-}
-
-/* watermark / logo behind content */
-.hero::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  top: 40px;                      /* tweak vertical position (smaller => closer to top) */
-  width: 420px;                   /* tweak size to taste */
-  height: auto;
-  max-width: 60%;
-  max-height: 220px;
-  background-image: url("images/StarWeighLogo1.jpeg");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
-  opacity: 0.12;                  /* subtle watermark; increase/decrease as needed */
-  pointer-events: none;           /* doesn't block clicks */
-  z-index: 0;                      /* behind content */
-}
-
-/* keep text / buttons above watermark */
-.hero > * {
-  position: relative;
-  z-index: 1;
-}
