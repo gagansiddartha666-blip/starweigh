@@ -884,3 +884,18 @@ body::before {
   pointer-events: none;           /* does not block clicks */
   z-index: -1;                    /* stays behind all content */
 }
+/* ===== CLEAN PAGE WATERMARK (NO added colors) ===== */
+
+/* Do NOT modify your existing body background.
+   We only add a faint logo BEHIND everything. */
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;                      /* cover full page */
+  background: url("../images/StarWeighLogo1.jpeg")
+              center center / 420px no-repeat;  /* watermark size + position */
+  opacity: 0.06;                 /* faint, clean watermark */
+  pointer-events: none;          /* does not block clicks */
+  z-index: -1;                   /* stays behind EVERYTHING */
+}
