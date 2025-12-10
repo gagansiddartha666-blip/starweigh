@@ -854,3 +854,33 @@ nav a.is-current,
   .video-grid { grid-template-columns: 1fr; }
   .video-grid video { height: auto; max-height: 480px; }
 }
+/* ===== Full-page subtle logo watermark background ===== */
+body {
+  /* gradient background (your existing theme) */
+  background:
+    linear-gradient(180deg, #083656 0%, #0f4c81 100%);
+
+  /* Add the logo watermark */
+  background-image: 
+    url("../images/StarWeighLogo1.jpeg"),
+    linear-gradient(180deg, #083656 0%, #0f4c81 100%);
+
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;   /* stays fixed when scrolling */
+  background-size: 420px;         /* watermark size */
+
+  /* fade the logo so it doesn't affect readability */
+  opacity: 1; /* DO NOT reduce this; instead use pseudo-element below */
+}
+
+/* Apply faint opacity only to the logo, not the page */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: url("../images/StarWeighLogo1.jpeg") center/420px no-repeat;
+  opacity: 0.06;                  /* transparency level — perfect watermark */
+  pointer-events: none;           /* does not block clicks */
+  z-index: -1;                    /* stays behind all content */
+}
