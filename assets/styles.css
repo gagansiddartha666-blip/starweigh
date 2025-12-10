@@ -899,3 +899,29 @@ body::before {
   pointer-events: none;          /* does not block clicks */
   z-index: -1;                   /* stays behind EVERYTHING */
 }
+/* ===== Force neutral page background & show only the faint logo watermark ===== */
+/* 1) Ensure page base background is what you want (light grey in your original) */
+html, body {
+  background-image: none !important;
+  background: #f5f7fb !important;    /* change to white (#fff) if you prefer */
+  background-color: #f5f7fb !important;
+}
+
+/* 2) Put watermark only via pseudo element (no colors, no gradients) */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: url("../images/StarWeighLogo1.jpeg") center center / 420px no-repeat;
+  opacity: 0.06;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* 3) If header or footer themselves have gradients and you DO NOT want them,
+   override them here (optional — keep if you want header/footer colored) */
+header, .site-footer {
+  /* remove these lines if you want header/footer colors preserved */
+  background-image: none !important;
+  background: transparent !important;
+}
