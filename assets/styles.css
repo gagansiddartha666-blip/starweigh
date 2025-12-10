@@ -821,3 +821,36 @@ nav a.is-current,
     color: #ffffff !important;
   }
 }
+/* Product Demo Videos section */
+.video-section h2 { font-size: 22px; font-weight: 800; margin-bottom: 6px; }
+.video-section .muted { color: var(--muted); }
+
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+  align-items: start;
+}
+
+/* video tile */
+.video-grid video {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
+  border-radius: 10px;
+  background: #000;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.10);
+}
+
+/* center the CTA button row on small screens */
+.video-section .section-head .btn.secondary {
+  padding: 8px 12px;
+  font-size: 14px;
+}
+
+/* Single column on mobile */
+@media (max-width:820px) {
+  .video-grid { grid-template-columns: 1fr; }
+  .video-grid video { height: auto; max-height: 480px; }
+}
